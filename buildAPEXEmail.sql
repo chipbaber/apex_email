@@ -15,21 +15,25 @@ dbms_output.put_line('Getting the file from github.');
 --Get the code from github
 l_email_code := apex_web_service.make_rest_request( p_url => gitLocation, p_http_method => 'GET');
 
-htp.p(send_to);
-htp.p(title);
-htp.p(candidtate_description);
-
-/*Check for zero length Clob
+/*Check for zero length Clob*/
 IF (DBMS_LOB.GETLENGTH(l_email_code) = 0) THEN
     HTP.P('Document pulled from github is zero length.');
   ELSE
     len := DBMS_LOB.GETLENGTH(l_email_code);
-        ``/*`` iterate through the length of the clob
+        -- iterate through the length of the clob
         WHILE pos < len
         loop
         begin
         dbms_lob.read(l_email_code, amt, pos, buf);
         pos := pos + amt;
+
+        --Replacement Text procedures title and text
+        IF (title is not null) THEN
+          buf := replace(buf,'Add Candidate Title',title);
+        end if;
+        IF (candidtate_description is not null) THEN
+        buf := replace(buf,'Add Candidate Description',candidtate_description);
+        end if;
 
         -- print to APEX
         htp.p(buf);
@@ -41,7 +45,7 @@ IF (DBMS_LOB.GETLENGTH(l_email_code) = 0) THEN
 
         end loop;
 end if;
-*/
+
 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
