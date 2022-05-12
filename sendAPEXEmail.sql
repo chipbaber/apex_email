@@ -6,10 +6,8 @@ gitLocation varchar2(2000) := 'https://raw.githubusercontent.com/chipbaber/apex_
 email_id NUMBER;
 
 begin
-
 --Get the code from github
 l_email_code := apex_web_service.make_rest_request( p_url => gitLocation, p_http_method => 'GET');
-
 
 --Replacement Text procedures title and text
 IF (:P8_CANDIDATE_TITLE is not null) THEN
