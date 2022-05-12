@@ -11,7 +11,7 @@ title VARCHAR2(50) := :P8_CANDIDATE_TITLE;
 candidtate_description VARCHAR2(400) := :P8_CANDIDATE_OVERVIEW;
 
 begin
-dbms_output.put_line('Getting the file from github.');
+
 --Get the code from github
 l_email_code := apex_web_service.make_rest_request( p_url => gitLocation, p_http_method => 'GET');
 
