@@ -54,8 +54,8 @@ IF (:P8_TO_EMAIL is not null) THEN
   -- commit to send the email
 apex_mail.push_queue();
 :P8_RETURN_ACTION :='Email Successfully sent';
-
-  --do nothing
+ELSE
+  :P8_RETURN_ACTION :='Null too email address, please fill in to send';
 end if;
 
 EXCEPTION
