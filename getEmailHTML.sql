@@ -14,6 +14,7 @@ begin
 --Get the code from github
 l_email_code := apex_web_service.make_rest_request( p_url => gitLocation, p_http_method => 'GET');
 
+--Comment this out if needed
 htp.p('<b>To:  </b>'||:P8_TO_EMAIL||'<br>');
 htp.p('<b>Reply To:  </b>'||:P8_TO_REPLY_TO||'<br>');
 htp.p('<b>Email Subject:  </b>'||:P8_EMAIL_SUBJECT||'<br>');
